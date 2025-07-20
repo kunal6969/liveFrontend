@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.5.1",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.25.1"
+  }
+}
+</script>
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#E0E7FF" />
+    <meta
+      name="description"
+      content="MNIT LIVE - MNIT Hostel Room Exchange Platform"
+    />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                animation: {
+                    'aurora-bg': 'aurora-bg 20s ease-in-out infinite',
+                    'light-sweep': 'light-sweep 2s ease-in-out infinite',
+                    'pulse-glow-green': 'pulse-glow-green 2s ease-in-out infinite',
+                    'pulse-glow-red': 'pulse-glow-red 2s ease-in-out infinite',
+                    'tilt-shimmer': 'tilt-shimmer 2s ease-in-out infinite',
+                    'rotate-gradient': 'rotate-gradient 20s linear infinite',
+                    'float-particle': 'float-particle var(--duration, 10s) var(--delay, 0s) ease-in-out infinite',
+                    'hologram-float': 'hologram-float 6s ease-in-out infinite',
+                },
+                keyframes: {
+                    'aurora-bg': {
+                        '0%': { backgroundPosition: '0% 50%' },
+                        '50%': { backgroundPosition: '100% 50%' },
+                        '100%': { backgroundPosition: '0% 50%' },
+                    },
+                    'light-sweep': {
+                        '0%': { transform: 'translateX(-100%) skewX(-30deg)' },
+                        '100%': { transform: 'translateX(200%) skewX(-30deg)' },
+                    },
+                    'pulse-glow-green': {
+                        '0%, 100%': { boxShadow: '0 0 8px var(--glow-color), 0 0 12px var(--glow-color)', opacity: '0.8' },
+                        '50%': { boxShadow: '0 0 16px var(--glow-color), 0 0 24px var(--glow-color)', opacity: '1' },
+                    },
+                     'pulse-glow-red': {
+                        '0%, 100%': { boxShadow: '0 0 6px #ef4444, 0 0 10px #ef4444', opacity: '0.8' },
+                        '50%': { boxShadow: '0 0 12px #ef4444, 0 0 20px #ef4444', opacity: '1' },
+                    },
+                    'tilt-shimmer': {
+                        '0%': { backgroundPosition: '200% 0' },
+                        '100%': { backgroundPosition: '-200% 0' },
+                    },
+                    'rotate-gradient': {
+                        '0%': { transform: 'rotate(0deg)' },
+                        '100%': { transform: 'rotate(360deg)' },
+                    },
+                    'float-particle': {
+                        '0%': { transform: 'translate(0, 0)', opacity: '0' },
+                        '25%': { opacity: '1' },
+                        '75%': { opacity: '1' },
+                        '100%': { transform: 'translate(var(--tx, 0px), var(--ty, 0px))', opacity: '0' },
+                    },
+                    'hologram-float': {
+                        '0%': { transform: 'translateY(0px) rotateX(5deg)', boxShadow: '0 25px 40px rgba(255, 0, 255, 0.2)' },
+                        '50%': { transform: 'translateY(-10px) rotateX(5deg)', boxShadow: '0 40px 50px rgba(255, 0, 255, 0.3)' },
+                        '100%': { transform: 'translateY(0px) rotateX(5deg)', boxShadow: '0 25px 40px rgba(255, 0, 255, 0.2)' },
+                    }
+                }
+            }
+        }
+      }
+    </script>
+    <title>MNIT LIVE</title>
+<style>
+    @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    @keyframes pop-in {
+        0% { opacity: 0; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    .animate-pop-in { 
+        animation: pop-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        will-change: transform, opacity;
+    }
+
+    /* For Modals */
+    @keyframes modal-backdrop-fade-in {
+        0% { backdrop-filter: blur(0px); background-color: rgba(0,0,0,0); }
+        100% { backdrop-filter: blur(4px); background-color: rgba(0,0,0,0.7); }
+    }
+    .animate-modal-backdrop {
+        animation: modal-backdrop-fade-in 0.3s ease-out both;
+    }
+
+    @keyframes modal-content-pop-in {
+        0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .animate-modal-content {
+        animation: modal-content-pop-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    
+    /* CGPA Page Animations */
+    @keyframes pulse-grid {
+        0% { opacity: 0.5; }
+        50% { opacity: 1; }
+        100% { opacity: 0.5; }
+    }
+    
+    @keyframes slide-down-glow {
+        from {
+            opacity: 0;
+            transform: translateY(-15px);
+            box-shadow: 0 0 0px #0ff;
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-slide-down-glow {
+        animation: slide-down-glow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    
+    @keyframes digit-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+            filter: blur(5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+    }
+    
+    @keyframes glitch-shake {
+        0%, 100% { transform: translateX(0); }
+        10% { transform: translateX(-2px) skewX(2deg); }
+        20% { transform: translateX(2px) skewX(-2deg); }
+        30% { transform: translateX(-2px) skewX(2deg); }
+        40% { transform: translateX(2px) skewX(-2deg); }
+        50% { transform: translateX(0); }
+    }
+    .glitch-shake {
+        animation: glitch-shake 0.3s linear;
+        border-color: #ff3333 !important;
+        box-shadow: 0 0 8px rgba(255, 51, 51, 0.7) !important;
+    }
+
+    /* Global Futuristic Theme Styles */
+    body.futuristic-theme {
+        background-color: #020617 !important;
+        background-image: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.1) 0px, transparent 50%), radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.1) 0px, transparent 50%), radial-gradient(at 52% 99%, hsla(355, 98%, 61%, 0.1) 0px, transparent 50%), radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.1) 0px, transparent 50%), radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.1) 0px, transparent 50%), radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.1) 0px, transparent 50%), radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.1) 0px, transparent 50%) !important;
+        color: #e2e8f0 !important;
+    }
+    .futuristic-title {
+        color: #93c5fd; /* light blue */
+        text-shadow: 0 0 10px rgba(147, 197, 253, 0.7);
+    }
+    .text-glow-white {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 255, 255, 0.6);
+    }
+    .futuristic-text-primary {
+        color: #e2e8f0;
+    }
+    .futuristic-text-secondary {
+        color: #94a3b8; /* slate-400 */
+    }
+    .holo-card {
+        background: rgba(15, 23, 42, 0.6) !important; 
+        backdrop-filter: blur(12px); 
+        border: 1px solid rgba(0, 255, 255, 0.2) !important;
+        border-radius: 1rem; 
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); 
+        transition: all 0.3s ease;
+    }
+    .holo-card:hover { 
+        border-color: rgba(0, 255, 255, 0.5) !important; 
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2); 
+        transform: translateY(-2px);
+    }
+
+    /* Hologram Effect for CGPA page */
+    @keyframes scanlines {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 50px; }
+    }
+    .content-blur {
+        filter: blur(4px);
+        transition: filter 0.3s ease-in-out;
+    }
+    .hologram-panel {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 180px;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    .hologram-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient( to bottom, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100% );
+        background-size: 100% 4px;
+        animation: scanlines 0.4s linear infinite;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    .hologram-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 0, 255, 0.4);
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+        z-index: 10;
+        animation: hologram-float 6s ease-in-out infinite, pop-in 0.5s ease-out;
+        transform-style: preserve-3d;
+        perspective: 800px;
+    }
+    .hologram-overlay::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient( to bottom, transparent 0%, rgba(255, 0, 255, 0.08) 50%, transparent 100% );
+        background-size: 100% 3px;
+        animation: scanlines 0.2s linear infinite;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
+    /* Shake animation for error states */
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+        20%, 40%, 60%, 80% { transform: translateX(4px); }
+    }
+    .animate-shake {
+        animation: shake 0.5s ease-in-out;
+    }
+    
+    /* Custom scrollbar for better UX */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(6, 182, 212, 0.6);
+        border-radius: 3px;
+        transition: background 0.3s ease;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(6, 182, 212, 0.8);
+    }
+    
+    /* Enhanced dropdown animations */
+    .dropdown-option {
+        animation: slideInOption 0.2s ease-out forwards;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    @keyframes slideInOption {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-100 text-slate-800 dark:bg-gray-950 dark:text-slate-200 min-h-screen antialiased">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+</body>
+</html>
