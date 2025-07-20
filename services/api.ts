@@ -1,5 +1,5 @@
 // In a real app, this would be an environment variable.
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = 'https://livebackend-2ttr.onrender.com/api';
 
 interface ApiResponse<T = any> {
   success: boolean;
