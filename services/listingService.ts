@@ -6,7 +6,7 @@ export const uploadAllotmentProof = async (file: File): Promise<{ allotmentProof
     formData.append('allotmentProof', file);
 
     // Use fetch directly for file upload instead of our JSON API wrapper
-    const response = await fetch('https://livebackend-2ttr.onrender.com/api/listings/upload-proof', {
+    const response = await fetch('https://server.mnit.live/api/listings/upload-proof', {
         method: 'POST',
         credentials: 'include', // Important for authentication
         body: formData

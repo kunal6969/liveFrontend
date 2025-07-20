@@ -57,7 +57,7 @@ The service layer automatically transforms between these formats.
 const courses = await attendanceService.getCourses();
 
 // Backend Request
-GET https://livebackend-2ttr.onrender.com/api/attendance/courses
+GET https://server.mnit.live/api/attendance/courses
 Cookie: token=jwt_token
 
 // Backend Response (direct array)
@@ -92,7 +92,7 @@ Cookie: token=jwt_token
 const course = await attendanceService.addCourse("Physics", "#10B981");
 
 // Backend Request
-POST https://livebackend-2ttr.onrender.com/api/attendance/courses
+POST https://server.mnit.live/api/attendance/courses
 Content-Type: application/json
 Cookie: token=jwt_token
 Body: {"name": "Physics", "color": "#10B981"}
@@ -118,7 +118,7 @@ const updatedCourse = await attendanceService.markAttendance(
 );
 
 // Backend Request
-PATCH https://livebackend-2ttr.onrender.com/api/attendance/courses/{courseId}/mark
+PATCH https://server.mnit.live/api/attendance/courses/{courseId}/mark
 Content-Type: application/json
 Cookie: token=jwt_token
 Body: {"date": "2025-01-21", "present": true}
@@ -139,7 +139,7 @@ Body: {"date": "2025-01-21", "present": true}
 await attendanceService.deleteCourse(courseId);
 
 // Backend Request
-DELETE https://livebackend-2ttr.onrender.com/api/attendance/courses/{courseId}
+DELETE https://server.mnit.live/api/attendance/courses/{courseId}
 Cookie: token=jwt_token
 
 // Backend Response
@@ -152,7 +152,7 @@ Cookie: token=jwt_token
 ```typescript
 const api = {
     request: (endpoint: string, options: RequestInit = {}) => {
-        return fetch(`https://livebackend-2ttr.onrender.com/api${endpoint}`, {
+        return fetch(`https://server.mnit.live/api${endpoint}`, {
             ...options,
             credentials: 'include', // ✅ Sends cookies automatically
             headers: {

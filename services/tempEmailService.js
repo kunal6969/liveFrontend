@@ -3,7 +3,7 @@
   const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/sendOtpForSignup', {
+    const response = await fetch('https://server.mnit.live/api/auth/sendOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +32,7 @@
 
 export async function verifyOtpAndRegister({ email, enteredOtp, userData }) {
   try {
-    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/verifyOtpForSignup', {
+    const response = await fetch('https://server.mnit.live/api/auth/verifyOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export async function verifyOtpAndRegister({ email, enteredOtp, userData }) {
 
 export async function verifyOtp({ email, enteredOtp }) {
   try {
-    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/verifyOtpForSignup', {
+    const response = await fetch('https://server.mnit.live/api/auth/verifyOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
