@@ -6,7 +6,7 @@ The MNIT Live frontend is **already configured** to work with your backend! Here
 
 ### 🔧 1. API Configuration (Already Done)
 The `services/api.ts` file is properly configured:
-- ✅ Base URL: `http://localhost:5001/api`
+- ✅ Base URL: `https://livebackend-2ttr.onrender.com/api`
 - ✅ `credentials: 'include'` for cookie authentication
 - ✅ Expected response format: `{success, message, data}`
 - ✅ Proper error handling with 401 redirects
@@ -232,7 +232,7 @@ router.use('/attendance/*', requireAuth);
 
 ## 🎯 Next Steps
 
-1. **Start your backend server** on `http://localhost:5001`
+1. **Start your backend server** on `https://livebackend-2ttr.onrender.com`
 2. **Ensure CORS is properly configured** to allow frontend requests
 3. **Test authentication** by logging in through the frontend
 4. **Verify course creation** works from the Attendance Tracker page

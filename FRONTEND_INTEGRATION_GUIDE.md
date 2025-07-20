@@ -264,7 +264,7 @@ export const useAuth = (): AuthContextType => {
 
 ```typescript
 // In a real app, this would be an environment variable.
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = 'https://livebackend-2ttr.onrender.com/api';
 
 interface ApiResponse<T = any> {
   success: boolean;
@@ -812,7 +812,7 @@ export const uploadAllotmentProof = async (file: File): Promise<{ allotmentProof
     formData.append('allotmentProof', file);
 
     // Use fetch directly for file upload instead of our JSON API wrapper
-    const response = await fetch('http://localhost:5001/api/listings/upload-proof', {
+    const response = await fetch('https://livebackend-2ttr.onrender.com/api/listings/upload-proof', {
         method: 'POST',
         credentials: 'include', // Important for authentication
         body: formData
@@ -879,7 +879,7 @@ export async function sendOtp({ email, userName }) {
   const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    const response = await fetch('http://localhost:5001/api/auth/sendOtpForSignup', {
+    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/sendOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -908,7 +908,7 @@ export async function sendOtp({ email, userName }) {
 
 export async function verifyOtpAndRegister({ email, enteredOtp, userData }) {
   try {
-    const response = await fetch('http://localhost:5001/api/auth/verifyOtpForSignup', {
+    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/verifyOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -937,7 +937,7 @@ export async function verifyOtpAndRegister({ email, enteredOtp, userData }) {
 
 export async function verifyOtp({ email, enteredOtp }) {
   try {
-    const response = await fetch('http://localhost:5001/api/auth/verifyOtpForSignup', {
+    const response = await fetch('https://livebackend-2ttr.onrender.com/api/auth/verifyOtpForSignup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
